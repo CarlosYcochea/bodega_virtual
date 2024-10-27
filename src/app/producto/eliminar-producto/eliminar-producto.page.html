@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>eliminarProducto</ion-title>
+  </ion-toolbar>
+  <ion-buttons slot="end">
+    <ion-back-button defaultHref="/"></ion-back-button>
+  </ion-buttons>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{producto.nombre}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <p>Producto : </p>
+        <p>{{producto.nombre}}</p>
+      </ion-item>
+      <ion-item>
+        <p>Materialidad : </p>
+        <p>{{producto.materialidad}}</p>
+      </ion-item>
+      <ion-button (click)="eliminarProducto(producto.id)">Eliminar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

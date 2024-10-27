@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <div class="logo-container">
+      <img src="assets/img/barron_logo.png " alt="Logo corporativo" class="logo">
+    </div>
+    <h2 class="login-title">Iniciar Sesión</h2>
+    <div class="login-form">
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+      </ion-item> 
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="login()">Iniciar Sesión</ion-button>
+    </div>
+    <div class="additional-options">
+      <a routerLink="/restablecer-contrasena" class="forgot-password">¿Olvidaste tu contraseña?</a>
+      <p class="register-prompt">¿No tienes una cuenta? <a routerLink="/registro">Regístrate</a></p>
+  
+    </div>
+
+  </div>
+</ion-content>

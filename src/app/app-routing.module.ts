@@ -11,6 +11,35 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: 'restablecer',
+    loadChildren: () => import('./restablecer-contrasena/restablecer.module').then( m => m.RestablecerPageModule)
+  },  {
+    path: 'actualizar-producto',
+    loadChildren: () => import('./producto/actualizar-producto/actualizar-producto.module').then( m => m.ActualizarProductoPageModule)
+  },
+  {
+    path: 'agregar-producto',
+    loadChildren: () => import('./producto/agregar-producto/agregar-producto.module').then( m => m.AgregarProductoPageModule)
+  },
+  {
+    path: 'eliminar-producto',
+    loadChildren: () => import('./producto/eliminar-producto/eliminar-producto.module').then( m => m.EliminarProductoPageModule)
+  },
+  {
+    path: 'gestion',
+    loadChildren: () => import('./producto/gestion/gestion.module').then( m => m.GestionPageModule)
+  },
+
+
 ];
 
 @NgModule({

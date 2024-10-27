@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>gestion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar placeholder="Buscar productos"></ion-searchbar>
+  
+  <ion-button expand="block" [routerLink]="['/agregar-producto']">Agregar Producto</ion-button>
+  <ion-list padding>
+    <ion-item *ngFor="let p of productos">
+      <ion-label>{{p.nombre}}</ion-label>
+      <ion-button [routerLink]="['/actualizar-producto/',p.id]"><ion-icon name="pencil-outline"></ion-icon></ion-button><br />
+      <ion-button color="danger" [routerLink]="['/eliminar-producto',p.id]"><ion-icon name="trash-outline"></ion-icon></ion-button><br />
+    </ion-item>
+  </ion-list>
+</ion-content>
+  

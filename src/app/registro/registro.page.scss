@@ -1,0 +1,80 @@
+
+
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .form {
+    ion-item {
+      --background: #f4f5f8;
+      --border-radius: 5px;
+      --padding-start: 10px;
+      --padding-end: 10px;
+      margin-bottom: 20px;
+    }
+  
+    ion-label {
+      color: #666;
+    }
+  
+    ion-input {
+      --padding-start: 10px;
+      --padding-end: 10px;
+    }
+  }
+  
+  .submit-button {
+    margin-top: 30px;
+    --background: #3880ff;
+    --border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    height: 50px;
+  }
+  
+  .additional-options {
+    margin-top: 30px;
+    text-align: center;
+  
+    a {
+      color: #3880ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  
+    p {
+      font-size: 16px;
+      color: #666;
+    }
+  }
+
+  .submit-button {
+    margin-top: 30px;
+    --background: #3880ff;
+    --border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    height: 50px;
+  }
+  
+  // Estilos para pantallas más pequeñas
+  @media (max-width: 576px) {
+    .form-container {
+      max-width: 100%;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
