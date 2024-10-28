@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthServiceService {
-  private apiUrl = 'http://10.16.56.110:3000/usuarios'; // URL del json-server
+  private apiUrl = 'http://192.168.1.125:3000/usuarios'; // URL del json-server
   private authState = new BehaviorSubject<boolean>(false);
 
   constructor(private storage: Storage, private http: HttpClient, private router: Router) {

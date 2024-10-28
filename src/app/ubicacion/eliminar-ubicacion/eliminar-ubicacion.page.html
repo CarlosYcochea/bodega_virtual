@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Eliminar Ubicación</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Mostrar los detalles de la ubicación -->
+  <ion-card *ngIf="ubicacion">
+    <ion-card-header>
+      <ion-card-title>{{ ubicacion.nombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Rack: {{ ubicacion.rack }}</p>
+      <p>Ubicación: {{ ubicacion.ubicacion }}</p>
+      <p>Cantidad: {{ ubicacion.cantidad }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón para confirmar la eliminación -->
+  <ion-button expand="full" color="danger" (click)="confirmarEliminar()">
+    Eliminar Ubicación
+  </ion-button>
+
+  <!-- Spinner para mostrar mientras se está eliminando la ubicación -->
+  <ion-spinner *ngIf="eliminando" name="dots" style="display: block; margin: 20px auto;"></ion-spinner>
+</ion-content>

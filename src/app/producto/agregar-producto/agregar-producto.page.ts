@@ -18,8 +18,8 @@ export class AgregarProductoPage implements OnInit {
 
   producto: MLproducto = {
     id: 2,
-    nombre: 'hola',
-    materialidad: 'hulo'
+    nombre: '',
+    materialidad: ''
   };
 
   constructor( private restApi: ProductoService,

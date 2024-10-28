@@ -1,0 +1,105 @@
+{
+  "productos": [
+    {
+      "id": "1",
+      "nombre": "QF- fortex70 30x40cm",
+      "materialidad": "fortex 70"
+    },
+    {
+      "id": "2",
+      "nombre": "QF- fortex60 30x30cm",
+      "materialidad": "fortex 60"
+    },
+    {
+      "id": "3",
+      "nombre": "QF- fortex50 40x50cm",
+      "materialidad": "fortex 50"
+    },
+    {
+      "id": "0290",
+      "nombre": "hola",
+      "materialidad": "hulo"
+    }
+  ],
+  "ubicaciones": [
+    {
+      "nombre": "QF- fortex70 30x40cm",
+      "rack": "3",
+      "ubicacion": "A",
+      "cantidad": "20",
+      "id": "2"
+    },
+    {
+      "nombre": "QF- fortex60 30x30cm",
+      "rack": "4",
+      "ubicacion": "A",
+      "cantidad": "10",
+      "id": "4"
+    },
+    {
+      "id": "6",
+      "nombre": "QF- fortex50 40x50cm",
+      "rack": "1",
+      "ubicacion": "A",
+      "cantidad": "30"
+    },
+    {
+      "id": "b083",
+      "nombre": "cesar",
+      "rack": "5",
+      "ubicacion": "b",
+      "cantidad": 155
+    },
+    {
+      "id": "5ded",
+      "nombre": "carlos",
+      "rack": "1",
+      "ubicacion": "A",
+      "cantidad": 30
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "10",
+      "nombre": "Cesar Escamilla",
+      "email": "cescamill@barronvieyra.cl",
+      "password": "Calo1234"
+    },
+    {
+      "id": "20",
+      "nombre": "Carlos Ycochea",
+      "email": "chinbote@barronvieyra.cl",
+      "password": "Calo1234"
+    },
+    {
+      "id": "12",
+      "nombre": "Edgardo Pinares",
+      "email": "veganoql@barronvieyra.cl",
+      "password": "Calo1234"
+    },
+    {
+      "id": "8ad8",
+      "nombre": "pedro",
+      "email": "pedro@barronvieyra.cl",
+      "password": "Calo1234"
+    },
+    {
+      "id": "adfa",
+      "nombre": "ernesto",
+      "email": "ernesto@barronvieyra.cl",
+      "password": "Calo1234"
+    },
+    {
+      "id": "f88a",
+      "nombre": "caro",
+      "email": "caro@barronvieyra.cl",
+      "password": "Calu2345"
+    },
+    {
+      "id": "9b0c",
+      "nombre": "cesar",
+      "email": "cesar@barronvieyra.cl",
+      "password": "2611Cesa"
+    }
+  ]
+}

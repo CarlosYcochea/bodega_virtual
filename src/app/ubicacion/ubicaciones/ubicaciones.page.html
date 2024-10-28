@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>ubicaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-searchbar placeholder="Buscar ubicaciones"></ion-searchbar>
+  <ion-button expand="block" [routerLink]="['/agregar-ubicacion']">Agregar Ubicación</ion-button>
+  <ion-list>
+    <ion-item *ngFor="let ubicacion of ubicaciones">
+      <ion-label>{{ ubicacion.nombre }}</ion-label>
+      <ion-button [routerLink]="['/actualizar-ubicacion/',ubicacion.id]"><ion-icon name="pencil-outline"></ion-icon></ion-button><br />
+      <ion-button color="danger" [routerLink]="['/eliminar-ubicacion',ubicacion.id]"><ion-icon name="trash-outline"></ion-icon></ion-button><br />
+    </ion-item>
+  </ion-list>
+</ion-content>

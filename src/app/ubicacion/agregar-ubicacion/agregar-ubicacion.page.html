@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Ubicación</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Formulario reactivo -->
+  <form [formGroup]="ubicacionForm" (ngSubmit)="agregarUbicacion()">
+
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="ubicacionForm?.get('nombre')?.invalid && ubicacionForm?.get('nombre')?.touched">
+      El nombre es obligatorio y debe tener al menos 2 caracteres.
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="floating">Rack</ion-label>
+      <ion-input formControlName="rack"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="ubicacionForm?.get('rack')?.invalid && ubicacionForm?.get('rack')?.touched">
+      El rack es obligatorio.
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="floating">Ubicación</ion-label>
+      <ion-input formControlName="ubicacion"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="ubicacionForm?.get('ubicacion')?.invalid && ubicacionForm?.get('ubicacion')?.touched">
+      La ubicación es obligatoria.
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="floating">Cantidad</ion-label>
+      <ion-input type="number" formControlName="cantidad"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="ubicacionForm?.get('cantidad')?.invalid && ubicacionForm?.get('cantidad')?.touched">
+      La cantidad debe ser al menos 1.
+    </ion-text>
+
+    <!-- Botón para enviar el formulario -->
+    <ion-button expand="full" type="submit" [disabled]="ubicacionForm.invalid">Agregar Ubicación</ion-button>
+
+
+  </form>
+</ion-content>

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RestablecerPageRoutingModule } from './restablecer-routing.module';
+import { UbicacionesPageRoutingModule } from './ubicaciones-routing.module';
 
-import { RestablecerPage } from './restablecer.page';
+import { UbicacionesPage } from './ubicaciones.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RestablecerPageRoutingModule
+    UbicacionesPageRoutingModule
   ],
-  declarations: [RestablecerPage]
+  declarations: [UbicacionesPage]
 })
-export class RestablecerPageModule {}
+export class UbicacionesPageModule {}

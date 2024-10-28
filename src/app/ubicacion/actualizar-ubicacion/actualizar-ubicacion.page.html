@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Actualizar Ubicación</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="ubicacionForm" (ngSubmit)="actualizarUbicacion()">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="ubicacionForm?.get('nombre')?.invalid && ubicacionForm?.get('nombre')?.touched">
+      El nombre es requerido.
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">Rack</ion-label>
+      <ion-input formControlName="rack" type="text"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="ubicacionForm?.get('rack')?.invalid && ubicacionForm?.get('rack')?.touched">
+      El rack es requerido.
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">Ubicación</ion-label>
+      <ion-input formControlName="ubicacion" type="text"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="ubicacionForm?.get('ubicacion')?.invalid && ubicacionForm?.get('ubicacion')?.touched">
+      La ubicación es requerida.
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">Cantidad</ion-label>
+      <ion-input formControlName="cantidad" type="number"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="ubicacionForm?.get('cantidad')?.invalid && ubicacionForm?.get('cantidad')?.touched">
+      La cantidad es requerida.
+    </ion-text>
+
+    <ion-button expand="full" type="submit" [disabled]="ubicacionForm.invalid">
+      Actualizar Ubicación
+    </ion-button>
+  </form>
+</ion-content>
