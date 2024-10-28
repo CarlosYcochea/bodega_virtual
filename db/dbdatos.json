@@ -56,6 +56,34 @@
       "rack": "1",
       "ubicacion": "A",
       "cantidad": 30
+    },
+    {
+      "id": "7106",
+      "nombre": "ewqeq",
+      "rack": "wqeqew",
+      "ubicacion": "qweqe",
+      "cantidad": 23
+    },
+    {
+      "id": "0ef1",
+      "nombre": "ewqeqw",
+      "rack": "eqwqwe",
+      "ubicacion": "eqweqwe",
+      "cantidad": 12
+    },
+    {
+      "id": "18cf",
+      "nombre": "qweqwe",
+      "rack": "eqweqeq",
+      "ubicacion": "eqweq",
+      "cantidad": 12
+    },
+    {
+      "id": "476f",
+      "nombre": "eqwqe",
+      "rack": "qewqeq",
+      "ubicacion": "eqwe",
+      "cantidad": 12
     }
   ],
   "usuarios": [
