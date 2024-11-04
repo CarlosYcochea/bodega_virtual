@@ -115,7 +115,7 @@ export class SqliteService {
       })
     );
   }
-
+  
   // Obtener una ubicación específica desde SQLite
   obtenerUbicacion(id: number): Observable<any> {
     const query = `SELECT * FROM ${this.tableName} WHERE id = ?`;
