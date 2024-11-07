@@ -1,22 +1,36 @@
+<!-- Cabecera de la página -->
 <ion-header>
+  <!-- Barra de herramientas superior -->
   <ion-toolbar>
+    <!-- Título de la página -->
     <ion-title>actualizarProducto</ion-title>
   </ion-toolbar>
+  <!-- Botones en la esquina derecha -->
   <ion-buttons slot="end">
+    <!-- Botón para regresar a la página anterior, por defecto va a la raíz '/' -->
     <ion-back-button defaultHref="/"></ion-back-button>
   </ion-buttons>
 </ion-header>
 
+<!-- Contenido principal de la página con padding -->
 <ion-content padding>
+  <!-- Formulario reactivo que usa formGroup y se ejecuta onFormSubmit al enviarse -->
   <form [formGroup]="productoForm" (ngSubmit)="onFormSubmit(productoForm.value)">
+    <!-- Campo para el nombre del producto -->
     <ion-item>
+      <!-- Etiqueta flotante para el campo nombre -->
       <ion-label position="floating">Nombre</ion-label>
+      <!-- Input que usa two-way binding con producto.nombre y está vinculado al formControl 'nombre' -->
       <ion-input type="text" [(ngModel)]="producto.nombre"  formControlName="nombre"></ion-input>
     </ion-item>
+    <!-- Campo para la materialidad del producto -->
     <ion-item>
+      <!-- Etiqueta flotante para el campo materialidad -->
       <ion-label position="floating">Materialidad</ion-label>
+      <!-- Input que usa two-way binding con producto.materialidad y está vinculado al formControl 'materialidad' -->
       <ion-input type="text" [(ngModel)]="producto.materialidad" formControlName="materialidad"></ion-input>
     </ion-item>
+    <!-- Botón de submit que ocupa todo el ancho y se deshabilita si el formulario no es válido -->
     <ion-button type="submit" expand="block" [disabled]="!productoForm.valid">Guardar</ion-button>
   </form>  
 </ion-content>

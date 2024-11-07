@@ -3,7 +3,7 @@
     {
       "id": "1",
       "nombre": "QF- fortex70 30x40cm",
-      "materialidad": "fortex 70"
+      "materialidad": "fortex 79"
     },
     {
       "id": "2",
@@ -19,6 +19,21 @@
       "id": "0290",
       "nombre": "hola",
       "materialidad": "hulo"
+    },
+    {
+      "id": "5635",
+      "nombre": "perro",
+      "materialidad": "tg"
+    },
+    {
+      "id": "7b3b",
+      "nombre": "carlos",
+      "materialidad": "new dexter"
+    },
+    {
+      "id": "42f3",
+      "nombre": "QF 30x40",
+      "materialidad": "fortex80"
     }
   ],
   "ubicaciones": [
@@ -84,6 +99,129 @@
       "rack": "qewqeq",
       "ubicacion": "eqwe",
       "cantidad": 12
+    },
+    {
+      "0": {
+        "id": 21,
+        "nombre": "carlos",
+        "rack": "1",
+        "ubicacion": "A",
+        "cantidad": 20
+      },
+      "1": {
+        "id": 22,
+        "nombre": "cesar",
+        "rack": "3",
+        "ubicacion": "v",
+        "cantidad": 200
+      },
+      "id": "fb32"
+    },
+    {
+      "0": {
+        "id": 23,
+        "nombre": "alejandro",
+        "rack": "3",
+        "ubicacion": "f",
+        "cantidad": 12
+      },
+      "id": "52c6"
+    },
+    {
+      "0": {
+        "id": 24,
+        "nombre": "jses",
+        "rack": "2",
+        "ubicacion": "a",
+        "cantidad": 89
+      },
+      "id": "1108"
+    },
+    {
+      "0": {
+        "id": 25,
+        "nombre": "trye",
+        "rack": "3",
+        "ubicacion": "e",
+        "cantidad": 90
+      },
+      "1": {
+        "id": 26,
+        "nombre": "yte",
+        "rack": "1",
+        "ubicacion": "w",
+        "cantidad": 34
+      },
+      "id": "d80b"
+    },
+    {
+      "0": {
+        "id": 25,
+        "nombre": "trye",
+        "rack": "3",
+        "ubicacion": "e",
+        "cantidad": 90
+      },
+      "1": {
+        "id": 26,
+        "nombre": "yte",
+        "rack": "1",
+        "ubicacion": "w",
+        "cantidad": 34
+      },
+      "id": "c326"
+    },
+    {
+      "id": "27",
+      "nombre": "edara",
+      "rack": "1",
+      "ubicacion": "a",
+      "cantidad": 23
+    },
+    {
+      "id": "27",
+      "nombre": "edara",
+      "rack": "1",
+      "ubicacion": "a",
+      "cantidad": 23
+    },
+    {
+      "id": "28",
+      "nombre": "trey",
+      "rack": "2",
+      "ubicacion": "a",
+      "cantidad": 34
+    },
+    {
+      "id": "2b93",
+      "nombre": "tres",
+      "rack": "1",
+      "ubicacion": "a",
+      "cantidad": 90
+    },
+    {
+      "id": "f793",
+      "nombre": "tyuu",
+      "rack": "3",
+      "ubicacion": "a",
+      "cantidad": 87
+    },
+    {
+      "id": "51cc",
+      "nombre": "tres",
+      "rack": "1",
+      "ubicacion": "a",
+      "cantidad": 90
+    },
+    {
+      "0": {
+        "id": 31,
+        "nombre": "cesar",
+        "rack": "1",
+        "ubicacion": "qwee",
+        "cantidad": 12
+      },
+      "id": "4d53"
     }
   ],
   "usuarios": [
@@ -127,6 +265,18 @@
       "id": "9b0c",
       "nombre": "cesar",
       "email": "cesar@barronvieyra.cl",
+      "password": "2611Cesa"
+    },
+    {
+      "id": "bce2",
+      "nombre": "cesar Escamilla",
+      "email": "cesar@barronvieyra.cl",
+      "password": "2611Cesa"
+    },
+    {
+      "id": "71e1",
+      "nombre": "sfuerntes",
+      "email": "sfuentes@barronvieyra.cl",
       "password": "2611Cesa"
     }
   ]

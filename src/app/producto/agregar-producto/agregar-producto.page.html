@@ -1,23 +1,34 @@
+<!-- Encabezado de la página -->
 <ion-header>
   <ion-toolbar>
+    <!-- Título que aparece en la barra superior -->
     <ion-title>Ingreso Producto</ion-title>
+    <!-- Botón de retroceso ubicado a la derecha que regresa a la ruta raíz -->
     <ion-buttons slot="end">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenido principal de la página con padding -->
 <ion-content padding>
+  <!-- Formulario reactivo que usa formGroup y ejecuta onFormSubmit al enviarse -->
   <form [formGroup]="productoForm" (ngSubmit)="onFormSubmit(productoForm.value)">
+    <!-- Campo para el nombre del producto -->
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text" [(ngModel)]="producto.nombre"  formControlName="nombre"  ></ion-input>
+      <!-- Input que usa two-way binding con producto.nombre y está vinculado al formControl 'nombre' -->
+      <ion-input type="text" [(ngModel)]="producto.nombre"  formControlName="nombre"></ion-input>
+      <!-- Botón que activa la función de escaneo -->
       <ion-button (click)="scan()">Escanear</ion-button>
     </ion-item>
+    <!-- Campo para la materialidad del producto -->
     <ion-item>
       <ion-label position="floating">Materialidad</ion-label>
+      <!-- Input que usa two-way binding con producto.materialidad y está vinculado al formControl 'materialidad' -->
       <ion-input type="text" [(ngModel)]="producto.materialidad" formControlName="materialidad"></ion-input>
     </ion-item>
+    <!-- Botón de submit que se deshabilita si el formulario no es válido -->
     <ion-button type="submit" expand="block" [disabled]="!productoForm.valid">Guardar</ion-button>
   </form>
-</ion-content>
+</ion-content> 

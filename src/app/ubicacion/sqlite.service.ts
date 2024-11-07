@@ -3,6 +3,15 @@ import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Platform } from '@ionic/angular';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
+interface Ubicacion {
+  id: number;
+  nombre: string;
+  rack: string;
+  ubicacion: string;
+  cantidad: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +22,7 @@ export class SqliteService {
   private readonly dbName: string = 'ubicaciones.db';
   private readonly tableName: string = 'ubicaciones';
 
-  constructor(private sqlite: SQLite, private platform: Platform) {
+  constructor(private sqlite: SQLite, private platform: Platform, private http: HttpClient) {
     // Esperar a que la plataforma esté lista antes de inicializar la base de datos
     this.platform.ready().then(() => {
       this.initializeDatabase();
@@ -102,16 +111,38 @@ export class SqliteService {
   obtenerUbicaciones(): Observable<any[]> {
     return from(this.getDbInstance().then(db => db.executeSql(`SELECT * FROM ${this.tableName}`, []))).pipe(
       map((res) => {
-        const ubicaciones = [];
+        const ubicaciones: Ubicacion[] = [];
         for (let i = 0; i < res.rows.length; i++) {
-          ubicaciones.push(res.rows.item(i));
+          ubicaciones.push({
+            id: res.rows.item(i).id,
+            nombre: res.rows.item(i).nombre,
+            rack: res.rows.item(i).rack,
+            ubicacion: res.rows.item(i).ubicacion,
+            cantidad: res.rows.item(i).cantidad
+          });
         }
-        console.log('Ubicaciones obtenidas de SQLite:', ubicaciones);
+        
+        if (ubicaciones.length > 0) {
+          ubicaciones.forEach(ubicacion => {
+            this.verificarApiRest().subscribe(estaConectado => {
+              if (estaConectado) {
+                this.enviarDatosApiRest(ubicacion).subscribe({
+                  next: () => {
+                    console.log('Ubicación enviada correctamente:', ubicacion);
+                    this.eliminarUbicacion(ubicacion.id).subscribe();
+                  },
+                  error: (error) => console.error('Error al enviar ubicación:', error)
+                });
+              }
+            });
+          });
+        }
+
         return ubicaciones;
       }),
       catchError((error) => {
         console.error('Error al obtener ubicaciones:', error);
-        return of([]); // Retornar lista vacía si hay error
+        return of([]);
       })
     );
   }
@@ -134,5 +165,31 @@ export class SqliteService {
         return of(null); // Retornar null si hay error
       })
     );
+  }
+
+  // verificar si esta conectado la api rest
+  verificarApiRest(): Observable<boolean> {
+    return this.http.get('http://10.16.56.110:3000/ubicaciones').pipe(
+      map(() => true),
+      catchError(() => of(false))
+    );
+  }
+
+  // Enviar datos a la api rest
+  enviarDatosApiRest(ubicacion: Ubicacion): Observable<any> {
+    const datoFormateado = {
+      id: ubicacion.id,
+      nombre: ubicacion.nombre,
+      rack: ubicacion.rack,
+      ubicacion: ubicacion.ubicacion,
+      cantidad: ubicacion.cantidad
+    };
+
+    return this.http.post('http://10.16.56.110:3000/ubicaciones', datoFormateado);
+  }
+
+  // Eliminar todos los datos de la base de datos de SQLite
+  eliminarTodosLosDatos(): Observable<any> {
+    return from(this.getDbInstance().then(db => db.executeSql(`DELETE FROM ${this.tableName}`, [])));
   }
 }

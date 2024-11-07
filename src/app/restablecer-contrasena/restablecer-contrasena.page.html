@@ -1,19 +1,30 @@
+<!-- Encabezado de la página -->
 <ion-header>
+  <!-- Barra de herramientas superior -->
   <ion-toolbar>
+    <!-- Botones alineados a la derecha -->
     <ion-buttons slot="end">
+      <!-- Botón de retroceso que lleva a la ruta raíz '/' -->
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
+    <!-- Título de la página -->
     <ion-title>Restablecer Contraseña</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenido principal con padding en todos los lados -->
 <ion-content class="ion-padding">
+  <!-- Formulario que ejecuta restablecerContrasena() al enviarse -->
   <form (ngSubmit)="restablecerContrasena()">
+    <!-- Campo de entrada para el nombre de usuario -->
     <ion-item>
+      <!-- Etiqueta flotante para el campo de entrada -->
       <ion-label position="floating">Nombre de Usuario</ion-label>
+      <!-- Input de texto vinculado a la variable 'nombre' usando ngModel -->
       <ion-input type="text" [(ngModel)]="nombre" name="nombre" required></ion-input>
     </ion-item>
 
+    <!-- Botón de envío que ocupa todo el ancho disponible -->
     <ion-button expand="full" type="submit">RECUPERAR</ion-button>
   </form>
 </ion-content>

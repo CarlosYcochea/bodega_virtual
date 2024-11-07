@@ -1,27 +1,42 @@
+<!-- Encabezado de la página -->
 <ion-header>
+  <!-- Barra de herramientas superior -->
   <ion-toolbar>
+    <!-- Título de la página -->
     <ion-title>eliminarProducto</ion-title>
   </ion-toolbar>
+  <!-- Contenedor de botones alineado a la derecha -->
   <ion-buttons slot="end">
+    <!-- Botón para regresar a la página anterior, por defecto va a la raíz '/' -->
     <ion-back-button defaultHref="/"></ion-back-button>
   </ion-buttons>
 </ion-header>
 
+<!-- Contenido principal de la página -->
 <ion-content>
+  <!-- Tarjeta que contiene la información del producto -->
   <ion-card>
+    <!-- Encabezado de la tarjeta -->
     <ion-card-header>
+      <!-- Título de la tarjeta que muestra el nombre del producto -->
       <ion-card-title>{{producto.nombre}}</ion-card-title>
     </ion-card-header>
 
+    <!-- Contenido de la tarjeta -->
     <ion-card-content>
+      <!-- Elemento de lista que muestra el nombre del producto -->
       <ion-item>
         <p>Producto : </p>
+        <!-- Interpolación para mostrar el nombre del producto -->
         <p>{{producto.nombre}}</p>
       </ion-item>
+      <!-- Elemento de lista que muestra la materialidad del producto -->
       <ion-item>
         <p>Materialidad : </p>
+        <!-- Interpolación para mostrar la materialidad del producto -->
         <p>{{producto.materialidad}}</p>
       </ion-item>
+      <!-- Botón que ejecuta la función eliminarProducto al hacer clic, pasando el ID del producto -->
       <ion-button (click)="eliminarProducto(producto.id)">Eliminar</ion-button>
     </ion-card-content>
   </ion-card>

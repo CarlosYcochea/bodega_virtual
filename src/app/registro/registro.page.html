@@ -1,26 +1,43 @@
+<!-- Encabezado de la página -->
 <ion-header>
+  <!-- Barra de herramientas superior -->
   <ion-toolbar>
+    <!-- Botones alineados a la derecha -->
     <ion-buttons slot="end">
+      <!-- Botón de retroceso que lleva a la ruta raíz -->
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
+    <!-- Título de la página -->
     <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenido principal con padding en todos los lados -->
 <ion-content class="ion-padding">
+  <!-- Formulario de registro con referencia de plantilla #registroForm -->
   <form #registroForm id="registroForm">
+    <!-- Campo para el nombre -->
     <ion-item>
+      <!-- Etiqueta flotante para el campo nombre -->
       <ion-label position="floating">Nombre</ion-label>
+      <!-- Input de texto para el nombre -->
       <ion-input type="text" id="nombre"></ion-input>
     </ion-item>
+    <!-- Campo para el email -->
     <ion-item>
+      <!-- Etiqueta flotante para el campo email -->
       <ion-label position="floating">Email</ion-label>
+      <!-- Input de tipo email -->
       <ion-input type="email" id="email"></ion-input>
     </ion-item>
+    <!-- Campo para la contraseña -->
     <ion-item>
+      <!-- Etiqueta flotante para el campo contraseña -->
       <ion-label position="floating">Contraseña</ion-label>
+      <!-- Input de tipo password para ocultar los caracteres -->
       <ion-input type="password" id="password"></ion-input>
     </ion-item>
+    <!-- Botón de submit que ocupa todo el ancho disponible -->
     <ion-button expand="block" type="submit">Registrar</ion-button>
   </form> 
 </ion-content>

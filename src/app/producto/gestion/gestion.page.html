@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar placeholder="Buscar productos"></ion-searchbar>
+  <ion-searchbar placeholder="Buscar productos" [(ngModel)]="searchTerm" (ionInput)="searchProducts()"></ion-searchbar>
   
   <ion-button expand="block" [routerLink]="['/agregar-producto']">Agregar Producto</ion-button>
   <ion-list padding>
