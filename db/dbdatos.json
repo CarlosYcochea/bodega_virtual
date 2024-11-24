@@ -222,6 +222,20 @@
         "cantidad": 12
       },
       "id": "4d53"
+    },
+    {
+      "id": 1,
+      "nombre": "cesar",
+      "rack": "3",
+      "ubicacion": "f",
+      "cantidad": 35
+    },
+    {
+      "id": 2,
+      "nombre": "cesar",
+      "rack": "8",
+      "ubicacion": "b",
+      "cantidad": 35
     }
   ],
   "usuarios": [
