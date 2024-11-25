@@ -7,7 +7,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 // URL de la API REST
-const apiUrl = "http://10.16.56.110:3000/productos";
+const apiUrl = "https://6743cc7fb7464b1c2a65e236.mockapi.io/productos";
 // Configuración de cabeceras HTTP
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

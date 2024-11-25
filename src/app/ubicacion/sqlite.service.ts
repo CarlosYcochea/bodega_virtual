@@ -169,7 +169,7 @@ export class SqliteService {
 
   // verificar si esta conectado la api rest
   verificarApiRest(): Observable<boolean> {
-    return this.http.get('http://10.16.56.110:3000/ubicaciones').pipe(
+    return this.http.get('https://6743d15ab7464b1c2a65f46e.mockapi.io/ubicaciones').pipe(
       map(() => true),
       catchError(() => of(false))
     );
@@ -185,7 +185,7 @@ export class SqliteService {
       cantidad: ubicacion.cantidad
     };
 
-    return this.http.post('http://10.16.56.110:3000/ubicaciones', datoFormateado);
+    return this.http.post('https://6743d15ab7464b1c2a65f46e.mockapi.io/ubicaciones', datoFormateado);
   }
 
   // Eliminar todos los datos de la base de datos de SQLite
