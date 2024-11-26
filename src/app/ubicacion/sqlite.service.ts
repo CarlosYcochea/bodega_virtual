@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Platform } from '@ionic/angular';
-import { from, Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { from, Observable, of, forkJoin } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 interface Ubicacion {
@@ -74,71 +74,104 @@ export class SqliteService {
     );
   }
 
-  // Modificar una ubicación en SQLite
   modificarUbicacion(id: number, ubicacion: any): Observable<any> {
-    const query = `UPDATE ${this.tableName} SET nombre = ?, rack = ?, ubicacion = ?, cantidad = ? WHERE id = ?`;
-    const params = [ubicacion.nombre, ubicacion.rack, ubicacion.ubicacion, ubicacion.cantidad, id];
-
-    return from(this.getDbInstance().then(db => db.executeSql(query, params))).pipe(
-      map((res) => {
-        console.log('Ubicación modificada en SQLite:', res);
-        return res;
-      }),
-      catchError((error) => {
-        console.error('Error al modificar ubicación:', error);
-        return of(null); // Manejar error
-      })
-    );
-  }
-
-  // Eliminar una ubicación en SQLite
-  eliminarUbicacion(id: number): Observable<any> {
-    const query = `DELETE FROM ${this.tableName} WHERE id = ?`;
-
-    return from(this.getDbInstance().then(db => db.executeSql(query, [id]))).pipe(
-      map((res) => {
-        console.log('Ubicación eliminada en SQLite:', res);
-        return res;
-      }),
-      catchError((error) => {
-        console.error('Error al eliminar ubicación:', error);
-        return of(null); // Manejar error
-      })
-    );
-  }
-
-  // Obtener todas las ubicaciones desde SQLite
-  obtenerUbicaciones(): Observable<any[]> {
-    return from(this.getDbInstance().then(db => db.executeSql(`SELECT * FROM ${this.tableName}`, []))).pipe(
-      map((res) => {
-        const ubicaciones: Ubicacion[] = [];
-        for (let i = 0; i < res.rows.length; i++) {
-          ubicaciones.push({
-            id: res.rows.item(i).id,
-            nombre: res.rows.item(i).nombre,
-            rack: res.rows.item(i).rack,
-            ubicacion: res.rows.item(i).ubicacion,
-            cantidad: res.rows.item(i).cantidad
-          });
+    return this.verificarApiRest().pipe(
+      switchMap(estaConectado => {
+        if (estaConectado) {
+          return this.http.put(`https://6743d15ab7464b1c2a65f46e.mockapi.io/ubicaciones/${id}`, ubicacion);
+        } else {
+          const query = `UPDATE ${this.tableName} SET nombre = ?, rack = ?, ubicacion = ?, cantidad = ? WHERE id = ?`;
+          const params = [ubicacion.nombre, ubicacion.rack, ubicacion.ubicacion, ubicacion.cantidad, id];
+          return from(this.getDbInstance().then(db => db.executeSql(query, params)));
         }
-        
-        if (ubicaciones.length > 0) {
-          ubicaciones.forEach(ubicacion => {
-            this.verificarApiRest().subscribe(estaConectado => {
-              if (estaConectado) {
-                this.enviarDatosApiRest(ubicacion).subscribe({
-                  next: () => {
-                    console.log('Ubicación enviada correctamente:', ubicacion);
-                    this.eliminarUbicacion(ubicacion.id).subscribe();
-                  },
-                  error: (error) => console.error('Error al enviar ubicación:', error)
+      }),
+      catchError(error => {
+        console.error('Error al modificar ubicación:', error);
+        return of(null);
+      })
+    );
+  }
+  
+  eliminarUbicacion(id: number): Observable<any> {
+    return this.verificarApiRest().pipe(
+      switchMap(estaConectado => {
+        if (estaConectado) {
+          return this.http.delete(`https://6743d15ab7464b1c2a65f46e.mockapi.io/ubicaciones/${id}`);
+        } else {
+          return from(this.getDbInstance()
+            .then(db => db.executeSql(`DELETE FROM ${this.tableName} WHERE id = ?`, [id])));
+        }
+      }),
+      catchError(error => {
+        console.error('Error al eliminar ubicación:', error);
+        return of(null);
+      })
+    );
+  }
+
+  obtenerUbicaciones(): Observable<any[]> {
+    return this.verificarApiRest().pipe(
+      switchMap(estaConectado => {
+        if (estaConectado) {
+          // Primero obtener datos de SQLite
+          return from(this.getDbInstance().then(db => 
+            db.executeSql(`SELECT * FROM ${this.tableName}`, [])
+          )).pipe(
+            switchMap((res) => {
+              const ubicacionesSqlite: Ubicacion[] = [];
+              for (let i = 0; i < res.rows.length; i++) {
+                ubicacionesSqlite.push({
+                  id: res.rows.item(i).id,
+                  nombre: res.rows.item(i).nombre,
+                  rack: res.rows.item(i).rack,
+                  ubicacion: res.rows.item(i).ubicacion,
+                  cantidad: res.rows.item(i).cantidad
                 });
               }
-            });
-          });
+  
+              // Si hay datos en SQLite, enviarlos a la API
+              if (ubicacionesSqlite.length > 0) {
+                const envios = ubicacionesSqlite.map(ubicacion => 
+                  this.enviarDatosApiRest(ubicacion)
+                );
+  
+                return forkJoin(envios).pipe(
+                  switchMap(() => {
+                    // Después de enviar todos los datos, eliminar registros de SQLite
+                    return this.eliminarTodosLosDatos().pipe(
+                      switchMap(() => {
+                        // Finalmente, obtener datos actualizados de la API
+                        return this.http.get<Ubicacion[]>('https://6743d15ab7464b1c2a65f46e.mockapi.io/ubicaciones');
+                      })
+                    );
+                  })
+                );
+              } else {
+                // Si no hay datos en SQLite, solo obtener de la API
+                return this.http.get<Ubicacion[]>('https://6743d15ab7464b1c2a65f46e.mockapi.io/ubicaciones');
+              }
+            })
+          );
+        } else {
+          // Si no hay conexión, obtener datos de SQLite
+          return from(this.getDbInstance().then(db => 
+            db.executeSql(`SELECT * FROM ${this.tableName}`, [])
+          )).pipe(
+            map((res) => {
+              const ubicaciones: Ubicacion[] = [];
+              for (let i = 0; i < res.rows.length; i++) {
+                ubicaciones.push({
+                  id: res.rows.item(i).id,
+                  nombre: res.rows.item(i).nombre,
+                  rack: res.rows.item(i).rack,
+                  ubicacion: res.rows.item(i).ubicacion,
+                  cantidad: res.rows.item(i).cantidad
+                });
+              }
+              return ubicaciones;
+            })
+          );
         }
-
-        return ubicaciones;
       }),
       catchError((error) => {
         console.error('Error al obtener ubicaciones:', error);
@@ -146,23 +179,22 @@ export class SqliteService {
       })
     );
   }
-  
-  // Obtener una ubicación específica desde SQLite
   obtenerUbicacion(id: number): Observable<any> {
-    const query = `SELECT * FROM ${this.tableName} WHERE id = ?`;
-    
-    return from(this.getDbInstance().then(db => db.executeSql(query, [id]))).pipe(
-      map((res) => {
-        if (res.rows.length > 0) {
-          console.log('Ubicación obtenida de SQLite:', res.rows.item(0));
-          return res.rows.item(0);
+    return this.verificarApiRest().pipe(
+      switchMap(estaConectado => {
+        if (estaConectado) {
+          return this.http.get(`https://6743d15ab7464b1c2a65f46e.mockapi.io/ubicaciones/${id}`);
         } else {
-          throw new Error('Ubicación no encontrada en SQLite');
+          return from(this.getDbInstance()
+            .then(db => db.executeSql(`SELECT * FROM ${this.tableName} WHERE id = ?`, [id])))
+            .pipe(
+              map(res => res.rows.length > 0 ? res.rows.item(0) : null)
+            );
         }
       }),
-      catchError((error) => {
+      catchError(error => {
         console.error('Error al obtener ubicación:', error);
-        return of(null); // Retornar null si hay error
+        return of(null);
       })
     );
   }
