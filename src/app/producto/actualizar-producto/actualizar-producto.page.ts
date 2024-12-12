@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators , FormControlName,FormGroupDirective} from '@angular/forms';
 import { MLproducto } from '../model/MLproducto';
 import { ProductoService } from '../producto.service';
+import { Storage } from '@ionic/storage-angular';
 
 // Decorador que define los metadatos del componente
 @Component({
@@ -19,6 +20,7 @@ export class ActualizarProductoPage implements OnInit {
   // Inicialización del objeto producto con valores por defecto
   producto: MLproducto = { id: 1, nombre: '', materialidad: '' };
   id: any = '';
+  usuario: string = '';
 
   // Constructor con inyección de dependencias necesarias
   constructor(
@@ -27,14 +29,19 @@ export class ActualizarProductoPage implements OnInit {
     public route: ActivatedRoute,                 // Para obtener parámetros de la ruta
     public router: Router,                        // Para la navegación
     private formBuilder: FormBuilder,             // Para crear formularios reactivos
-    public restApi: ProductoService               // Servicio para operaciones con productos
+    public restApi: ProductoService,              // Servicio para operaciones con productos
+    private storage: Storage               
   ) {}
 
   // Método que se ejecuta al inicializar el componente
   ngOnInit() {
     // Obtiene el producto según el ID en la URL
     this.obtenerProducto(this.route.snapshot.params['id']);
-
+    
+    // Obtener el nombre de usuario almacenado
+    this.storage.get('nombre').then((nombre) => {
+      this.usuario = nombre || ''; // Si no hay nombre, se asigna un valor vacío
+    });
     // Inicialización del formulario con validaciones
     this.productoForm = this.formBuilder.group({
       'nombre': [null, Validators.required],        // Campo nombre obligatorio
@@ -48,7 +55,7 @@ export class ActualizarProductoPage implements OnInit {
     this.producto.id = this.id;
 
     // Llamada al servicio para actualizar el producto
-    await this.restApi.actualizarProducto(this.id, this.producto).subscribe({
+    await this.restApi.actualizarProducto(this.id, this.producto, this.usuario).subscribe({
       next: (res) => {
         let id = res['id'];
         this.router.navigate(['/gestion', { id: id }]);  // Navega a la página de gestión

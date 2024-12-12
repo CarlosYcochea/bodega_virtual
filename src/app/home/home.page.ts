@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MovimientosService } from '../services/movimientos.service';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomePage implements OnInit{
   username: string = '';
+  movimientos: any[] = [];
 
-  constructor(private alertController: AlertController, private route: ActivatedRoute, private router: Router) { }
+  constructor(private alertController: AlertController, private route: ActivatedRoute, private router: Router, private movimientoService: MovimientosService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -19,6 +21,7 @@ export class HomePage implements OnInit{
         this.presentWelcomeAlert();
       }
     });
+    this.cargarMovimientos();
   }
 
 
@@ -30,6 +33,18 @@ export class HomePage implements OnInit{
     });
 
     await alert.present();
+  }
+
+  // Método para cargar los movimientos
+  cargarMovimientos() {
+    this.movimientoService.obtenerMovimientos().subscribe({
+      next: (data) => {
+        this.movimientos = data;  // Guardar los movimientos recibidos
+      },
+      error: (err) => {
+        console.error('Error al cargar los movimientos', err);
+      }
+    });
   }
 
 
